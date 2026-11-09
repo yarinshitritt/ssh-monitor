@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css">
+  <title>SSH Monitor</title>
+</head>
+<body>
+  <h1>SSH Monitor</h1>
+
+  <!-- Login form, hidden while connected -->
+  <form id="login-form">
+    <h2>Connect to a server</h2>
+    <input type="text" id="host" placeholder="server address" value="localhost" required>
+    <input type="number" id="port" placeholder="port" value="22" required>
+    <input type="text" id="username" placeholder="username" required>
+    <input type="password" id="password" placeholder="password" required>
+    <button type="submit">Connect</button>
+  </form>
+
+  <div id="terminal"></div>
+  <div id="status">not connected</div>
+
+  <!-- Updated every second from the server's metrics messages -->
+  <div id="metrics">
+    <div>connection state: <span id="m-state">-</span></div>
+    <div>server: <span id="m-remote">-</span></div>
+    <div>received: <span id="m-in">-</span></div>
+    <div>sent: <span id="m-out">-</span></div>
+    <div>receive rate: <span id="m-rate-in">-</span></div>
+    <div>send rate: <span id="m-rate-out">-</span></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
