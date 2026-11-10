@@ -1,0 +1,193 @@
+:root {
+  --bg: #0f1419;
+  --card: #171d24;
+  --inset: #0b0f14;
+  --border: #2a323c;
+  --text: #e6e9ee;
+  --muted: #8b95a3;
+  --accent: #3fb950;
+  --focus: #58a6ff;
+  --radius: 12px;
+  color-scheme: dark; /* dark scrollbars, including the terminal's */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* app.js hides the form with the hidden attribute; keep that working over the display rules below */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.app-header,
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header h1::before {
+  content: ">_";
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 16px;
+  color: var(--accent);
+  background: var(--inset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 14px;
+}
+
+.status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.layout {
+  display: grid;
+  gap: 20px;
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card h2,
+.card-title {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.fields input {
+  padding: 10px 12px;
+  background: var(--inset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.fields input:focus {
+  outline: none;
+  border-color: var(--focus);
+}
+
+button {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #0b0f14;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+#terminal {
+  background: #000;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.metric {
+  background: var(--inset);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric .label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.metric .value {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 20px;
+  font-weight: 600;
+}

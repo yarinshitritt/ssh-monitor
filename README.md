@@ -33,5 +33,3 @@ so they are higher than the amount of text shown in the terminal.
 
 Implemented: allowed-host list, WebSocket origin check, message size limit, server-side input validation,
 listening on localhost only, and the password is never stored or logged.
-
-Not implemented (needed for production): HTTPS/WSS, verifying the SSH server's host key, and user authentication for the app itself.

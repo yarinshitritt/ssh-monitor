@@ -4,33 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css">
+  <link rel="stylesheet" href="style.css">
   <title>SSH Monitor</title>
 </head>
 <body>
-  <h1>SSH Monitor</h1>
+  <header class="app-header">
+    <div>
+      <h1>SSH Monitor</h1>
+      <p class="subtitle">Browser SSH terminal with live connection monitoring</p>
+    </div>
+    <div id="status" class="status">not connected</div>
+  </header>
 
-  <!-- Login form, hidden while connected -->
-  <form id="login-form">
-    <h2>Connect to a server</h2>
-    <input type="text" id="host" placeholder="server address" value="localhost" required>
-    <input type="number" id="port" placeholder="port" value="22" required>
-    <input type="text" id="username" placeholder="username" required>
-    <input type="password" id="password" placeholder="password" required>
-    <button type="submit">Connect</button>
-  </form>
+  <main class="layout">
+    <!-- Login form, hidden while connected -->
+    <form id="login-form" class="card">
+      <h2>Connect to a server</h2>
+      <div class="fields">
+        <label>Server address
+          <input type="text" id="host" placeholder="server address" value="localhost" required>
+        </label>
+        <label>Port
+          <input type="number" id="port" placeholder="port" value="22" required>
+        </label>
+        <label>Username
+          <input type="text" id="username" placeholder="username" required>
+        </label>
+        <label>Password
+          <input type="password" id="password" placeholder="password" required>
+        </label>
+      </div>
+      <button type="submit">Connect</button>
+    </form>
 
-  <div id="terminal"></div>
-  <div id="status">not connected</div>
+    <section class="card">
+      <div class="card-title">Terminal</div>
+      <div id="terminal"></div>
+    </section>
 
-  <!-- Updated every second from the server's metrics messages -->
-  <div id="metrics">
-    <div>connection state: <span id="m-state">-</span></div>
-    <div>server: <span id="m-remote">-</span></div>
-    <div>received: <span id="m-in">-</span></div>
-    <div>sent: <span id="m-out">-</span></div>
-    <div>receive rate: <span id="m-rate-in">-</span></div>
-    <div>send rate: <span id="m-rate-out">-</span></div>
-  </div>
+    <!-- Updated every second from the server's metrics messages -->
+    <section class="card">
+      <div class="card-title">Connection monitor</div>
+      <div id="metrics" class="metrics">
+        <div class="metric"><span class="label">Connection state</span><span id="m-state" class="value">-</span></div>
+        <div class="metric"><span class="label">Server</span><span id="m-remote" class="value">-</span></div>
+        <div class="metric"><span class="label">Received</span><span id="m-in" class="value">-</span></div>
+        <div class="metric"><span class="label">Sent</span><span id="m-out" class="value">-</span></div>
+        <div class="metric"><span class="label">Receive rate</span><span id="m-rate-in" class="value">-</span></div>
+        <div class="metric"><span class="label">Send rate</span><span id="m-rate-out" class="value">-</span></div>
+      </div>
+    </section>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.js"></script>
   <script src="app.js"></script>
