@@ -7,6 +7,8 @@
   --muted: #8b95a3;
   --accent: #3fb950;
   --focus: #58a6ff;
+  --warning: #d29922;
+  --danger: #f85149;
   --radius: 12px;
   color-scheme: dark; /* dark scrollbars, including the terminal's */
 }
@@ -82,11 +84,20 @@ body {
   font-size: 14px;
 }
 
+/* The dot is red by default; app.js adds a class for the other states */
 .status::before {
   content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  background: var(--danger);
+}
+
+.status.connecting::before {
+  background: var(--warning);
+}
+
+.status.connected::before {
   background: var(--accent);
 }
 

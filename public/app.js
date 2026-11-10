@@ -12,6 +12,12 @@ term.open(termdiv);
 let ws = null;
 let lastError = null; // kept so the close handler does not hide an error message
 
+// Updates the header status; the state ("connecting", "connected" or "") picks the dot color in style.css.
+const setStatus = (text, state) => {
+  status.textContent = text;
+  status.className = "status " + state;
+};
+
 // Turns a byte count into readable text.
 const formatBytes = (bytes) => {
   if (bytes < 1024) return bytes + " B";
@@ -23,7 +29,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault(); // handle the form here instead of reloading the page
   lastError = null;
   term.reset(); // clear output from the previous session
-  status.textContent = "connecting...";
+  setStatus("connecting...", "connecting");
 
   ws = new WebSocket(`ws://${location.host}`);
 
@@ -44,7 +50,7 @@ form.addEventListener("submit", (event) => {
     const message = JSON.parse(event.data);
 
     if (message.type === "status") {
-      status.textContent = "connected";
+      setStatus("connected", "connected");
       form.hidden = true;
     }
 
@@ -55,7 +61,7 @@ form.addEventListener("submit", (event) => {
 
     if (message.type === "error") {
       lastError = message.message;
-      status.textContent = lastError;
+      setStatus(lastError, "");
     }
 
     if (message.type === "metrics") {
@@ -70,7 +76,7 @@ form.addEventListener("submit", (event) => {
 
   // After closing, the server stops sending metrics, so reset what would stay stale.
   ws.onclose = () => {
-    status.textContent = lastError || "disconnected";
+    setStatus(lastError || "disconnected", "");
     form.hidden = false;
     document.getElementById("m-state").textContent = "closed";
     document.getElementById("m-rate-in").textContent = "0 B/s";
